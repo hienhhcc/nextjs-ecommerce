@@ -58,6 +58,9 @@ export async function saveProduct(_initialState: unknown, formData: FormData) {
     },
   });
 
+  revalidatePath("/");
+  revalidatePath("/products");
+
   redirect("/admin/products");
 }
 
@@ -112,6 +115,9 @@ export async function updateProduct(
     },
   });
 
+  revalidatePath("/");
+  revalidatePath("/products");
+
   redirect("/admin/products");
 }
 
@@ -129,6 +135,8 @@ export async function toggleAvailableForPurchase({
     },
   });
 
+  revalidatePath("/");
+  revalidatePath("/products");
   revalidatePath("/admin/products");
 }
 
@@ -143,6 +151,8 @@ export async function deleteProduct({ id }: { id: string }) {
     return notFound();
   }
 
+  revalidatePath("/");
+  revalidatePath("/products");
   revalidatePath("/admin/products");
 
   await fs.unlink(product.filePath);
